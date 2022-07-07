@@ -1,11 +1,5 @@
 <?php include('src.php');?>
-<?php
-  $link1 = '';
-  $link2 = 'announcements';
-  $link3 = 'courses';
-  $link4 = 'gallery';
 
-?>
 
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" >
     <div class="carousel-indicators">
@@ -23,7 +17,7 @@
           <div class="carousel-caption">
             <h1><span style="color:#FFCF00"> President Ramon Magsaysay State University </span> - San Marcelino Campus</h1>
             <p>Keep up with the most recent announcements and events.</p>
-            <p><a class="btn btn-lg btn-warning"  href="http://localhost/prmsusm.edu.ph/<?= $link2 ?>/">View Announcements</a></p>
+            <p><a class="btn btn-lg btn-warning"  href="announcements/">View Announcements</a></p>
           </div>
         </div>
       </div>
@@ -34,7 +28,7 @@
           <div class="carousel-caption">
           <h1><span style="color:#FFCF00"> President Ramon Magsaysay State University </span> - San Marcelino Campus</h1>
             <p>Check out our available courses.</p>
-            <p><a class="btn btn-lg btn-warning"   href="http://localhost/prmsusm.edu.ph/<?= $link3 ?>/">View All Courses</a></p>
+            <p><a class="btn btn-lg btn-warning"   href="courses/">View All Courses</a></p>
           </div>
         </div>
       </div>
@@ -45,7 +39,7 @@
     <div class="carousel-caption">
     <h1><span style="color:#FFCF00"> President Ramon Magsaysay State University </span> - San Marcelino Campus</h1>
         <p>Check out our campus virtual tour</p>
-        <p><a class="btn btn-lg btn-warning"  href="http://localhost/prmsusm.edu.ph/<?= $link4 ?>/">Start Tour</a></p>
+        <p><a class="btn btn-lg btn-warning"  href="gallery/">Start Tour</a></p>
     </div>
     </div>
 </div>
