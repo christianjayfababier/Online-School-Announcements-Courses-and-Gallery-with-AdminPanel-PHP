@@ -25,7 +25,7 @@
     <body style="background-color: #E9EBEE;">
         <!-- Responsive navbar-->
           <!-- Navigation-->
-          <?php include('../../components/navigation.php');?>
+          <?php include('../../components/nav/nav-view.php');?>
         <!-- Page content-->
         <div class="container " style="margin-top:200px !important">
             <div class="row justify-content-center ">
@@ -59,7 +59,7 @@
             </div>
         </div>
        <!-- Footer-->
-       <?php include('../../components/footer.php');?>
+       <?php include('../../components/footer/footer-view.php');?>
         <!-- Bootstrap core JS-->
         <script src="../assets/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
