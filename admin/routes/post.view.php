@@ -70,8 +70,13 @@
                                                     <td><img src="../<?= $row['post_image']; ?>" style="width:75px"></td>
                                                     <td><em>Published</em><br> <?= $row['post_date']; ?></td>
                                                     <td class="align-right">
+                                                    
+                                                        <a href="../<?php echo $row['post_image']?>" target="_blank" class="text-secondary font-weight-bold text-xs" onlclick="show">
+                                                        <span class="badge badge-secondary" style="background-color:#32a852;width:100%" ><i class="fa fa-eye"></i> View</span> 
+                                                        </a>
+                                                        <hr>
                                                         <a href="edit.post.php?post=<?= $row['post_id']; ?>&post-title=<?php echo $row['post_title']; ?>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit post">
-                                                        <span class="badge badge-secondary" style="background-color:#57a7f7;width:100%" ><i class="fa fa-edit"></i>Edit</span> 
+                                                        <span class="badge badge-secondary" style="background-color:#57a7f7;width:100%" ><i class="fa fa-edit"></i> Edit</span> 
                                                         </a> <hr>
                                                         <a href="javascript:;" data-id="<?= $row['post_id']; ?>" class="text-secondary font-weight-bold text-xs delete" data-toggle="tooltip" data-original-title="Delete post">
                                                         <span class="badge badge-secondary" style="background-color:#f5655b;width:100%"><i class="fa fa-trash-alt"></i> Delete </span>
