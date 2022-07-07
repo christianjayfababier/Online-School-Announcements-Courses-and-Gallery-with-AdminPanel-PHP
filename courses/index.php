@@ -22,7 +22,7 @@
     <body style="background-color: #E9EBEE;">
         <!-- Responsive navbar-->
           <!-- Navigation-->
-          <?php include('../components/navigation.php');?>
+          <?php include('../components/nav/nav-courses.php');?>
 
 
 
@@ -70,7 +70,7 @@
             </div>
         </div>
         <!-- Footer-->
-        <?php include('../components/footer.php');?>
+        <?php include('../components/footer/footer-courses.php');?>
         <!-- Bootstrap core JS-->
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
