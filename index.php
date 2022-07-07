@@ -4,7 +4,7 @@
 
     <body id="page-top">
         <!-- Navigation-->
-        <?php include('components/navigation.php');?>
+        <?php include('components/nav/nav-home.php');?>
 
         
         <!-- PRMSU Dymanic header-->
@@ -89,7 +89,7 @@
 
       
         <!-- Footer-->
-        <?php include('components/footer.php');?>
+        <?php include('components/footer/footer-home.php');?>
        
         <!-- Bootstrap core JS-->
         <script src="assets/js/bootstrap.bundle.min.js"></script>
