@@ -55,7 +55,7 @@
                 </h3>
                     </div>
                     <div class="card-body">
-                            <p class="card-text"><?= $row['course_description']; ?></p>
+                            <p class="card-text" style="white-space: pre-wrap;"><?= $row['course_description']; ?></p>
                         </div>
                        
                     <div class="card-footer text-muted">

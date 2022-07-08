@@ -51,7 +51,7 @@
                                                 <tr>
                                                     <th scope="col">Title</th>
                                                     <th scope="col">Description</th>
-                                                    <th scope="col">Image</th>
+                                                    <th scope="col">Image/Video</th>
                                                     <th scope="col">Type</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
@@ -67,13 +67,39 @@
                                                 <tr>
                                                     <td><?= $row['img_title']; ?></td>
                                                     <td><?= $row['img_desc']; ?></td>
-                                                    <td><img src="../<?= $row['uploaded_image']; ?>" style="width:75px"></td>
-                                                    <td><?= $row['img_style']; ?></td>
+                                                    <?php
+                                                    if ($row['img_style'] === 'Video') {
+                                          echo '<td>';         
+                  echo  '<center><video width="200" height="150" controls>';
+                   echo '<source src="../';
+                   echo $row['uploaded_image'];
+                   echo '" type="video/mp4"> <source src="../';
+                   echo $row['uploaded_image']; 
+                   echo '" type="video/ogg"> Your browser does not support the video tag. </video></center>'; 
+                   echo '</td>';
+                                                    }else {
+                                                        echo '<td><center><img src="../';
+                                                        echo $row['uploaded_image']; 
+                                                        echo '" style="width:200px"></center></td>';
+                                                    }
+                                                    ?>
+                                                   
+                                                    
+                                                    <td><center><?= $row['img_style']; ?></center></td>
                                                  
                                                     <td class="align-right">
                                                       
                                                         <a href="javascript:;" data-id="<?= $row['img_id']; ?>" class="text-secondary font-weight-bold text-xs delete" data-toggle="tooltip" data-original-title="Delete post">
-                                                        <span class="badge badge-secondary" style="background-color:#f5655b"><i class="fa fa-trash-alt"></i> Delete Image</span>
+                                                        <span class="badge badge-secondary" style="background-color:#f5655b"><i class="fa fa-trash-alt"></i> 
+                                                    <?php 
+                                                    if ($row['img_style'] === 'Video')                             {
+                                                        echo 'Delete Video';
+                                                    }else{
+                                                        echo 'Delete Image';
+                                                    }
+                                                    ?>
+                                                    
+                                                    </span>
                                                         </a> 
                                                         
                                                       </td>

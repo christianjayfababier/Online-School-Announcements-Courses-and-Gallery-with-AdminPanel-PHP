@@ -41,7 +41,7 @@
                             <li class="nav-item ">
                                 <a class="nav-link dropdown-toggle" href="#"><i class="fa fa-fw fa-image"></i>Gallery  </a>
                                      <ul class="submenu collapse" style=" list-style:none ;">
-                                        <li><a class="nav-link" href="add.image.php">Add New Image</a></li>
+                                        <li><a class="nav-link" href="add.image.php">Add Photo/Video</a></li>
                                         <li><a class="nav-link" href="gallery.view.php">View All </a></li>
                                     </ul>
                             </li>

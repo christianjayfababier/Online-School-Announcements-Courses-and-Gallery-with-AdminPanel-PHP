@@ -18,6 +18,9 @@
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="assets/css/styles.css" rel="stylesheet" />
+   
+      
+
     </head>
     <body style="background-color: #E9EBEE;">
         <!-- Responsive navbar-->
@@ -42,22 +45,24 @@
             <div>
         <h1>Virtual Images</h1>
         <hr>
+
+  
     </div>
-                <!-- Blog entries-->
+                <!-- Panorama entries-->
                 <?php 
                         $conn = new engine_model();
                         $docu = $conn->fetchAll_vimages();
                         ?>
                         <?php foreach ($docu as $row) { ?>
                 <div class="col-lg-4">
-                    <!-- Featured blog post-->
+                    <!-- Panorama post-->
 
                    
                     <div class="card mb-4 shadow p-1 bg-white rounded">
                     <img  class="card-img-top" src="../admin/<?php echo $row['uploaded_image']?>" style="width:100%;height:100%;object-fit: contain">
                      
                     <div class="card-body">
-                    <?= $row['img_title']; ?>
+                    <h5><?= $row['img_title']; ?></h5>
                               </div>
                        
                     <div class="card-footer text-muted">
@@ -91,36 +96,102 @@
                     <?php }?>
                 </div>
 
-            <div class="row">
+
+                <div class="row">
             <div>
-        <h1>Regular Images</h1>
+        <h1>Videos</h1>
         <hr>
+
+  
     </div>
-                <!-- Blog entries-->
+                <!-- Video-->
                 <?php 
                         $conn = new engine_model();
-                        $docu = $conn->fetchAll_rimages();
+                        $docu = $conn->fetchAll_videos();
                         ?>
                         <?php foreach ($docu as $row) { ?>
-                <div class="col-lg-4">
-                    <!-- Featured blog post-->
+                <div class="col-lg-4" >
+                    <!--Video Post-->
 
                    
-                    <div class="card mb-4 shadow p-1 bg-white rounded">
-                    <img  class="card-img-top" src="../admin/<?php echo $row['uploaded_image']?>" style="width:100%;height:100%;object-fit: contain">
+                    <div class="card mb-4 shadow p-1 bg-white rounded" >
+                        
+                    <video width="405" height="250" controls>
+                     <source src="../admin/<?php echo $row['uploaded_image']?>" type="video/mp4">
+                    <source src="../admin/<?php echo $row['uploaded_image']?>" type="video/ogg">
+                    Your browser does not support the video tag.
+                    </video>
+                    
                      
                     <div class="card-body">
-                    <?= $row['img_title']; ?>
+                    <h5><?= $row['img_title']; ?></h5>
                               </div>
                        
                     <div class="card-footer text-muted">
                     <?= $row['img_desc']; ?>
                     <br>
                     <?php
+                   
+                    if ($row['img_style'] === 'Video') {
+                        echo '<span class="badge badge-secondary" style="background-color:#32a852"><em>Video</em></span>';
+                    }else{
+                        echo '<span class="badge badge-secondary" style="background-color:#6C757D"><em>Undefined</em></span>';
+                    }
                     
+                    ?>
+                    </div>
+
+
+ 
+
+
+
+                    </div>
+                    </div>
+                    <?php }?>
+                </div>
+
+
+            <div class="row">
+            <div>
+        <h1>Regular Images</h1>
+        <hr>
+    </div>
+                <!-- Regular entries-->
+                <?php 
+                        $conn = new engine_model();
+                        $docu = $conn->fetchAll_rimages();
+                        ?>
+                        <?php foreach ($docu as $row) { ?>
+                <div class="col-lg-4">
+                    <!-- Regular Image post-->
+
+                   
+                    <div class="card mb-4 shadow p-1 bg-white rounded" >
+
+<a href="../admin/<?php echo $row['uploaded_image']?>" target="_blank">
+<img  class="card-img-top" src="../admin/<?php echo $row['uploaded_image']?>" style="width:100%;height:100%;object-fit: contain" >
+</a>
+
+                    <div class="card-body">
+                    <h5><?= $row['img_title']; ?></h5>
+                              </div>
+                    
+                    <div class="card-footer text-muted">
+                    <?= $row['img_desc']; ?>
+                    <br>
+                    <?php
+
                     if ($row['img_style'] === 'Regular Image') {
                         echo '<span class="badge badge-secondary" style="background-color:#6C757D"><em>Regular Image</em></span>';
                     }elseif ($row['img_style'] === 'Panorama'){
+                        echo '<a href="virtual-tour-viewer.php?img=';
+                        echo  $row['img_id'];
+                        echo '&img-title=';
+                        echo $row['img_title'];
+                        echo '"><span class="badge badge-secondary"' ; 
+                        echo 'style="background-color:#007BFF"><em>View Virtual Image</em></span></a>';
+                    }elseif ($row['img_style'] === 'Video'){
                         echo '<a href="virtual-tour-viewer.php?img=';
                         echo  $row['img_id'];
                         echo '&img-title=';
@@ -136,7 +207,12 @@
 
                     </div>
                     </div>
+
+           
+
                     <?php }?>
+
+    
                 </div>
                 
               
@@ -148,5 +224,7 @@
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+
+ 
     </body>
 </html>

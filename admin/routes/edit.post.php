@@ -57,9 +57,15 @@
                                                 <div class="form-group row">
                                                     <label class="col-12 col-sm-3 col-form-label text-sm-right"><i class="fa fa-file-word"></i> Edit Post</label>
                                                 </div>
+                                                <?php 
+                                                if ($row['post_image'] === '') {
+                                                    echo '';
+                                                }else{
+                                                ?>
                                                 <div class="form-group row justify-content-center"> 
-                                                        <img src="../<?= $row['post_image']; ?>" style="width: 300px; height: auto">
+                                               <img src="../<?= $row['post_image']; ?>" style="width: 300px; height: auto">
                                                 </div>
+                                                <?php } ?>
                                                 <center><label class="col-12 col-sm-3 col-form-label  ">Title</label></center>
                                                 <div class="form-group row justify-content-center">
                                               

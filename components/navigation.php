@@ -17,10 +17,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                    <li class="nav-item"><a class="nav-link me-lg-3 text-white" href="http://localhost/prmsusm.edu.ph/<?= $link1 ?>">Home</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3 text-white" href="http://localhost/prmsusm.edu.ph/<?= $link2 ?>/">Announcements</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3 text-white" href="http://localhost/prmsusm.edu.ph/<?= $link3 ?>/">Courses</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3 text-white" href="http://localhost/prmsusm.edu.ph/<?= $link4 ?>/">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link me-lg-3 text-white" href="<?= $link1 ?>">Home</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3 text-white" href="<?= $link2 ?>/">Announcements</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3 text-white" href="<?= $link3 ?>/">Courses</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3 text-white" href="<?= $link4 ?>/">Gallery</a></li>
                      
                     </ul>
                    

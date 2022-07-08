@@ -26,12 +26,12 @@
     padding-top: 36px;">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                             <h2 class="pageheader-title"><i class="fa fa-fw fa-pen"></i> Add Image </h2>
+                             <h2 class="pageheader-title"><i class="fa fa-fw fa-pen"></i> Add Photo/Video </h2>
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Add Images to Gallery</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Add Images or Videos to Gallery</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -44,19 +44,21 @@
                 <div class="row justify-content-center" style="margin-top:10px">
                         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
                                     <div class="card influencer-profile-data">
-                                    <div class="card-header"><strong>Post Image</strong></div>
+                                    <div class="card-header"><strong>Post Photo/Video</strong></div>
                                         <div class="card-body">
                                              <div class="" id="message"></div>
                                             <form id="validationform" name="docu_form" data-parsley-validate="" novalidate="" enctype="multipart/form-data" >
                                                
                                             <div class="form-group row justify-content-center">
-                                                <img id="uploadPreview" style="width: 500px; height: auto" />
+
+                                               <center> <div id="img-vid-con" style="width: 500px; height: auto" ></div></center>
                                                 </div>
+
                                                 <div class="form-group row justify-content-center">
                                                     <div class="col-12 col-sm-8 col-lg-6">
-                                                        <input data-parsley-type="alphanum" type="file" alt="uploaded_image" id="uploaded_image" accept=".jpeg, .jpg, .png, .gif" required="" placeholder="" class="inputfile form-control" onchange="PreviewImage();" name="uploaded_image" required>
+                                                        <input data-parsley-type="alphanum" type="file" alt="uploaded_image" id="uploaded_image" accept="file_extension|audio/*|video/*|image/*|media_type" required="" placeholder="" class="inputfile form-control"  name="uploaded_image" required>
                                                         <label for="uploaded_image" style="width: 100%;padding:10px;"><center><i class="fa fa-fw fa-images">
-                                </i> <strong>Add Photo</strong></center></label>
+                                </i> <strong>Add Photo/Video</strong></center></label>
                                                       
                                                        
                                                     </div>
@@ -83,11 +85,10 @@
                                                 <div class="form-group row justify-content-center">
                                                     
                                                     <div class="col-12 col-sm-8 col-lg-6">
-                                                        <select data-parsley-type="alphanum" alt="img_style" type="text" required="" placeholder="Pano / Reg" class="form-control" id="img_style" required>
-                                                        <option value="Regular Image">--Required: Choose Image Type--</option> 
-                                                        <option value="Regular Image">Regular Image</option> 
-                                                        <option value="Panorama">Panorama / Virtual Tour Image</option>
-                                                        </select>
+                                                    
+                                                    <div id="img_style_opt"></div>
+                                                      
+                                                      
                                                     </div>
                                                 </div>
                                                 
@@ -96,7 +97,7 @@
                                                 <div class="card-footer">
                                             <div class="form-group row text-right">
                                                     <div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
-                                                        <button type="button" class="btn btn-space btn-primary" id="btn-docu">POST IMAGE</button>
+                                                        <button type="button" class="btn btn-space btn-primary" id="btn-docu">POST</button>
                                                     </div>
                                                 </div>
                                             </div>  
@@ -198,18 +199,121 @@
           });
       </script>
 
+
+
+
 <script>
 
-function PreviewImage() {
-    var oFReader = new FileReader();
-    oFReader.readAsDataURL(document.getElementById("uploaded_image").files[0]);
+//$("#inp-img-vid").change( function(){ imgPreview(this); } );
+document.getElementById("uploaded_image").addEventListener("change", onFileSelected, false);
 
-    oFReader.onload = function (oFREvent) {
-        document.getElementById("uploadPreview").src = oFREvent.target.result;
-    };
-};
+var tmpElement; //will be dynamically changed to Image or Video
 
+var file, file_ext, file_path, file_type, file_name;
+
+function show_Info_popUP()
+{
+    alert("File is selected... " + "\n name : " + file_name  + "\n type : " + file_type + "\n ext : " + file_ext );
+}
+
+function onFileSelected ( input )
+{
+ 
+    //if(input.files && input.files[0])
+    if( input.target.files[0] )
+    {
+        file = input.target.files[0]; // FileList object
+        
+        file_ext; //# will extract file extension
+        file_type = file.type; file_name = file.name;
+        file_path = (window.URL || window.webkitURL).createObjectURL(file);
+        
+        //# get file extension (eg: "jpg" or "jpeg" or "webp" etc)
+        file_ext = file_name.toLowerCase();
+        file_ext = file_ext.substr( (file_ext.lastIndexOf(".")+1), (file_ext.length - file_ext.lastIndexOf(".")) );
+        
+        //# get file type (eg: "image" or "video")
+        file_type = file_type.toLowerCase();
+        file_type = file_type.substr( 0, file_type.indexOf("/") );
+        
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+       
+        
+        //reader.onload = function(e)
+        reader.onloadend = function(evt) 
+        { 
+            
+            if (evt.target.readyState == FileReader.DONE) 
+            {
+                //# get container...
+                let container = document.getElementById("img-vid-con");
+                let options = document.getElementById("img_style_opt");
+                var x = document.getElementById('img_style_opt');
+                var img_style_opt;
+
+                
+                //# remove any already existing child element(s)
+                while (container.firstChild)  
+                { container.removeChild(container.firstChild); }
+                while (options.firstChild)  
+                { options.removeChild(options.firstChild); }
+                
+                //# if IMAGE...
+                if ( file_type == "image" )
+                {
+                    tmpElement = document.createElement( "img");
+                    tmpElement.setAttribute("id", "preview-img");
+                    img_style_opt = ' <select data-parsley-type="alphanum" alt="img_style" type="text" required="" placeholder="Pano / Reg / Video" class="form-control" id="img_style" required><option value="Regular Image">--Required: Choose Image Type--</option><option value="Regular Image">Regular Image</option><option value="Panorama">Panorama / Virtual Tour Image</option></select>';
+
+            
+                    
+                }
+
+              
+                //# if VIDEO...
+                if ( file_type == "video" )
+                {
+                    tmpElement = document.createElement( "video");
+                    tmpElement.setAttribute("id", "preview-vid");
+                    tmpElement.setAttribute("controls", "true" );
+                    img_style_opt = ' <select data-parsley-type="alphanum" alt="img_style" type="text" required="" placeholder="Pano / Reg / Video" class="form-control" id="img_style" required><option value="Video">Video</option></select>';
+
+                    
+                    tmpElement.addEventListener("loadeddata", () => 
+                    {
+                        //# what to do when some video data is loaded
+                        
+                        if (tmpElement.readyState >= 3) 
+                        { 
+                            //# what to do when video's first frame is ready
+                            tmpElement.muted = true; //# if you want silent preview
+                            tmpElement.play();
+                            
+                        }
+            
+                    }); 
+
+                    
+                }
+                
+                x.insertAdjacentHTML('afterbegin', img_style_opt);
+                
+                //# finalise display size
+                tmpElement.width = 500; tmpElement.height = 400;
+                
+                tmpElement.setAttribute("src", file_path);
+                container.appendChild(tmpElement);
+              
+            }
+        
+        }
+        
+    }
+}
+    
 </script>
+
 
 </body>
  

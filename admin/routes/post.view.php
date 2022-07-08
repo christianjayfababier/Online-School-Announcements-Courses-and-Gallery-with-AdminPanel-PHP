@@ -67,14 +67,26 @@
                                                 <tr>
                                                     <td><?= $row['post_title']; ?></td>
                                                     <td><?= $row['post_description']; ?></td>
-                                                    <td><img src="../<?= $row['post_image']; ?>" style="width:75px"></td>
+                                                    <td>
+                                                    <?php
+                                                    if ($row['post_image'] === '') {
+                                                        echo '<center>No Image Uploaded</center>';
+                                                    }else{
+                                                    ?>
+                                                    <center>
+                                                    <img src="../<?= $row['post_image']; ?>" style="width:100px;margin-bottom:5px;">
+                                                    
+                                                    <a href="../<?php echo $row['post_image']?>" target="_blank" class="text-secondary font-weight-bold text-xs" onlclick="show">
+                                                        <span class="badge badge-secondary" style="background-color:#32a852;width:60%" ><i class="fa fa-eye"></i> View </span> 
+                                                        </a>
+                                                        
+                                                    </center>
+                                                    <?php } ?>
+                                                        </td>
                                                     <td><em>Published</em><br> <?= $row['post_date']; ?></td>
                                                     <td class="align-right">
                                                     
-                                                        <a href="../<?php echo $row['post_image']?>" target="_blank" class="text-secondary font-weight-bold text-xs" onlclick="show">
-                                                        <span class="badge badge-secondary" style="background-color:#32a852;width:100%" ><i class="fa fa-eye"></i> View</span> 
-                                                        </a>
-                                                        <hr>
+                                                       
                                                         <a href="edit.post.php?post=<?= $row['post_id']; ?>&post-title=<?php echo $row['post_title']; ?>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit post">
                                                         <span class="badge badge-secondary" style="background-color:#57a7f7;width:100%" ><i class="fa fa-edit"></i> Edit</span> 
                                                         </a> <hr>

@@ -50,21 +50,32 @@
                         <?php foreach ($docu as $row) { ?>
                     <div class="card mb-4 shadow p-1 bg-white rounded">
                     <div class="card-header ">
-                    <img src="../assets/img/prmsu.png" style="width: 50px;">&nbsp; &nbsp;PRMSU Admin
+
+                    <img src="../assets/img/prmsu.png" style="width: 50px;">
+                    &nbsp; &nbsp;PRMSU Admin
                     </div>
+
                     <div class="card-body">
                             <h2 class="card-title"><?= $row['post_title']; ?></h2>
-                            <p class="card-text"><?= $row['post_description']; ?></p>
+                            <p class="card-text" style="white-space: pre-wrap;"><?= $row['post_description']; ?></p>
                         </div>
-                    <div style="width:850px ;height:350px;background-color:#000" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                             <?php 
-                      echo '<a href="post/view.php?post='.$row['post_id'].'&post-title='.$row['post_title'].'"> <img class="card-img-top w-850 h-350" style="width:100%;height:100%;object-fit: contain" src="../admin/'.$row['post_image'].'" alt="..." /></a>;'
+                            if ($row['post_image'] === '') {
+                                echo '';
+                            }else{
+                            ?>
+                    <div style="width:850px ;height:350px;background-color:#000" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
 
+                            <?php 
+                            
+                      echo '<a href="post/view.php?post='.$row['post_id'].'&post-title='.$row['post_title'].'"> <img class="card-img-top w-850 h-350" style="width:100%;height:100%;object-fit: contain" src="../admin/'.$row['post_image'].'" alt="..." /></a>;';
+                 
 
 
                 
                  ?>
                 </div>
+                <?php } ?>
                        
                     <div class="card-footer text-muted">
                     Posted on <?= date("M d, Y",strtotime($row['post_date'])); ?>

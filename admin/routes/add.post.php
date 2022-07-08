@@ -150,12 +150,9 @@
                 data.append('post_description', post_description);
                 data.append('post_image', $('#post_image')[0].files[0]);
    
-
-                if (post_title === '' || post_description === '') { //continue niyo nalang ito
-                  $('#message').html('<div class="alert alert-danger"> Required All Fields!</div>');
-                  } else {
-                      $.ajax({
-                          url: '../init/controllers/add_post.php',
+if (post_image === '' && post_title !== '' && post_description !== '' ) {
+                    $.ajax({
+                          url: '../init/controllers/add_post_no_img.php',
                           type: "POST",
                           data: data,
                           processData: false,
@@ -172,7 +169,36 @@
                               console.log("Failed");
                           }
                       });
-                  }     
+}else if(post_image !== '' && post_title === '' && post_description !== ''){
+               
+                  $('#message').html('<div class="alert alert-danger"> Required All Fields!</div>');
+                 
+}else if(post_image !== '' && post_title !== '' && post_description === ''){
+               
+                  $('#message').html('<div class="alert alert-danger"> Required All Fields!</div>');
+}else{
+    $.ajax({
+        url: '../init/controllers/add_post.php',
+        type: "POST",
+        data: data,
+        processData: false,
+        contentType: false,
+
+        async: false,
+        cache: false,
+
+        success: function(data) {
+            $('#message').html(data);
+
+        },
+        error: function(data) {
+            console.log("Failed");
+        }
+    });
+
+}
+
+
 
               });
           });

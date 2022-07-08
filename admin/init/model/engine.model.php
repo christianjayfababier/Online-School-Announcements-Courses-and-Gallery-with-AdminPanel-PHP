@@ -72,6 +72,17 @@
 			 }
 		 }
 
+		 public function add_post_no_img($post_title, $post_description){
+			$stmt = $this->conn->prepare("INSERT INTO `announcement_posts` (`post_title`, `post_description`) VALUES(?, ?)") or die($this->conn->error);
+			 $stmt->bind_param("ss", $post_title, $post_description);
+			 if($stmt->execute()){
+				 $stmt->close();
+				 $this->conn->close();
+				 return true;
+			 }
+		 }
+
+
 		 public function add_img($img_title ,$img_desc, $img_style, $uploaded_image){
 			$stmt = $this->conn->prepare("INSERT INTO `tb_gallery` (`img_title`, `img_desc`, `img_style`, `uploaded_image`) VALUES(?, ?, ?, ?)") or die($this->conn->error);
 			 $stmt->bind_param("ssss", $img_title, $img_desc, $img_style, $uploaded_image);
@@ -173,7 +184,7 @@
 		  }
 
 		  public function fetchAll_images(){ 
-            $sql = "SELECT * FROM  tb_gallery ";
+            $sql = "SELECT * FROM  tb_gallery ORDER BY date_uploaded DESC";
 				$stmt = $this->conn->prepare($sql);
 				$stmt->execute();
 				$result = $stmt->get_result();
@@ -186,7 +197,7 @@
 		  }
 
 		  public function fetchAll_rimages(){ 
-            $sql = "SELECT * FROM  tb_gallery  WHERE img_style = 'Regular Image'";
+            $sql = "SELECT * FROM  tb_gallery  WHERE img_style = 'Regular Image' ORDER BY date_uploaded DESC";
 				$stmt = $this->conn->prepare($sql);
 				$stmt->execute();
 				$result = $stmt->get_result();
@@ -199,7 +210,20 @@
 		  }
 
 		  public function fetchAll_vimages(){ 
-            $sql = "SELECT * FROM  tb_gallery WHERE img_style = 'Panorama' ";
+            $sql = "SELECT * FROM  tb_gallery WHERE img_style = 'Panorama' ORDER BY date_uploaded DESC";
+				$stmt = $this->conn->prepare($sql);
+				$stmt->execute();
+				$result = $stmt->get_result();
+		        $data = array();
+		         while ($row = $result->fetch_assoc()) {
+		                   $data[] = $row;
+		            }
+		         return $data;
+
+		  }
+
+		  public function fetchAll_videos(){ 
+            $sql = "SELECT * FROM  tb_gallery WHERE img_style = 'Video' ORDER BY date_uploaded DESC";
 				$stmt = $this->conn->prepare($sql);
 				$stmt->execute();
 				$result = $stmt->get_result();

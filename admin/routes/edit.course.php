@@ -66,7 +66,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-12 col-sm-3 col-form-label text-sm-right">Description</label>
                                                     <div class="col-12 col-sm-8 col-lg-6">
-                                                        <textarea data-parsley-type="alphanum" name="course_description" value="<?= $row['course_description']; ?>" type="text" required="" placeholder="" class="form-control course_description" style="height:200px"><?= $row['course_description']; ?></textarea>
+                                                        <textarea data-parsley-type="alphanum" name="course_description" value="<?= $row['course_description']; ?>" type="text" required="" placeholder="" class="form-control course_description" style="height:200px;"><?= $row['course_description']; ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">

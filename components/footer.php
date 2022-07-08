@@ -1,11 +1,5 @@
 <?php include('src.php');?>
-<?php
-  $link1 = '';
-  $link2 = 'announcements';
-  $link3 = 'courses';
-  $link4 = 'gallery';
 
-?>
 
 <footer class="bg-black text-center py-5">
             <div class="container px-5">
